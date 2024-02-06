@@ -6,6 +6,16 @@
     <meta name="csrf-token" content="<%= csrfToken %>" />
     <link rel="stylesheet" href="./css/styles.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(to right, #FFD700, #FFA500); /* Adjust the gradient colors as needed */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+    </style>
     <title>To-Do Manager</title>
 </head>
 <body>
@@ -13,6 +23,8 @@
         <div class="col-start-3 col-span-2">
             <%- include('header.ejs') %>
             <p class="py-2">Welcome to the To-Do Manager</p>
+            <!-- Form Container -->
+            
             <p class="py-2">New here? <a href="/signup" class="text-green-600">Sign-up</a></p>
             <p class="py-2">Already have an account? <a href="/login" class="text-green-600">Sign-in</a></p>
         </div>

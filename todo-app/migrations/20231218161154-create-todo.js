@@ -34,7 +34,8 @@ module.exports = {
       },
     });
   },
-  async down(queryInterface, Sequelize) {
+  // eslint-disable-next-line no-unused-vars
+  async down(queryInterface, _Sequelize) {
     await queryInterface.dropTable("Todos");
   },
 };

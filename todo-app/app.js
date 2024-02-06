@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+
 const express = require("express");
 const app = express();
 const { Todo, User } = require("./models");
@@ -65,7 +65,8 @@ passport.use(
             return done(null, false, { message: "Invalid password" });
           }
         })
-        .catch((error) => {
+        // eslint-disable-next-line no-unused-vars
+        .catch((_error) => {
           return done(null, false, { message: "Invalid E-mail" });
         });
     },
@@ -139,7 +140,7 @@ app.post("/users", async (request, response) => {
   const hashedPwd = await bcrypt.hash(request.body.password, saltRounds);
   console.log(hashedPwd);
   const trimmedPassword = request.body.password.trim();
-  //have to create a todo
+  
   if (request.body.firstName.length == 0) {
     request.flash("error", "First Name cant be empty");
     return response.redirect("/signup");
@@ -212,9 +213,7 @@ app.get("/todos", async function (_request, response) {
     console.log(error);
     return response.status(500).json({ error: "Internal Server Error" });
   }
-  // First, we have to query our PostgerSQL database using Sequelize to get list of all Todos.
-  // Then, we have to respond with all Todos, like:
-  // response.send(todos)
+  
 });
 
 app.get("/todos/:id", async function (request, response) {
@@ -247,7 +246,7 @@ app.post(
         dueDate: request.body.dueDate,
         userId: request.user.id,
       });
-      //return response.json(todo);
+      
       return response.redirect("/todos");
     } catch (error) {
       console.log(error);
@@ -277,8 +276,7 @@ app.delete(
   "/todos/:id",
   connectEnsureLogin.ensureLoggedIn(),
   async function (request, response) {
-    //console.log("We have to delete a Todo with ID: ", request.params.id);
-    // FILL IN YOUR CODE HERE
+    
     console.log("Deleting a Todo with ID: ", request.params.id);
     const loggedInUser = request.user.id;
     try {
@@ -288,9 +286,7 @@ app.delete(
       console.log(error);
       return response.status(500).json(error);
     }
-    // First, we have to query our database to delete a Todo by ID.
-    // Then, we have to respond back with true/false based on whether the Todo was deleted or not.
-    // response.send(true)
+    
   },
 );
 
