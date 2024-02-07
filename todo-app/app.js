@@ -1,4 +1,3 @@
-
 const express = require("express");
 const app = express();
 const { Todo, User } = require("./models");
@@ -140,7 +139,7 @@ app.post("/users", async (request, response) => {
   const hashedPwd = await bcrypt.hash(request.body.password, saltRounds);
   console.log(hashedPwd);
   const trimmedPassword = request.body.password.trim();
-  
+
   if (request.body.firstName.length == 0) {
     request.flash("error", "First Name cant be empty");
     return response.redirect("/signup");
@@ -213,7 +212,6 @@ app.get("/todos", async function (_request, response) {
     console.log(error);
     return response.status(500).json({ error: "Internal Server Error" });
   }
-  
 });
 
 app.get("/todos/:id", async function (request, response) {
@@ -246,7 +244,7 @@ app.post(
         dueDate: request.body.dueDate,
         userId: request.user.id,
       });
-      
+
       return response.redirect("/todos");
     } catch (error) {
       console.log(error);
@@ -276,7 +274,6 @@ app.delete(
   "/todos/:id",
   connectEnsureLogin.ensureLoggedIn(),
   async function (request, response) {
-    
     console.log("Deleting a Todo with ID: ", request.params.id);
     const loggedInUser = request.user.id;
     try {
@@ -286,7 +283,6 @@ app.delete(
       console.log(error);
       return response.status(500).json(error);
     }
-    
   },
 );
 
